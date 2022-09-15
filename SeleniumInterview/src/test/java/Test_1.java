@@ -18,12 +18,14 @@ public class Test_1 {
 	public static String name = "Schmidt";
 	public static String prename = "Bob";
 	public static String email = "test123@web.de";
-	public static String monthofBirth = "12";
+	public static String monthofBirth = "October";
 	public static String yearofBirth = "2000";
 	public static String day = "15";
 	public static String subject = "Maths";
+	public static String hobbies = "Sports,Reading";
+	public static String adress = "An der Schulstraﬂe 9a";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
 		if (browser.equalsIgnoreCase("Chrome")) {
@@ -38,7 +40,7 @@ public class Test_1 {
 		} else {
 			System.out.println("Driver Error");
 		}
-
+		driver.manage().window().maximize();
 		driver.get("https://demoqa.com/automation-practice-form");
 		driver.findElement(By.id("firstName")).sendKeys(prename);
 		driver.findElement(By.id("lastName")).sendKeys(name);
@@ -62,7 +64,7 @@ public class Test_1 {
 		}
 
 		driver.findElement(By.id("dateOfBirthInput")).click();
-
+		Thread.sleep(500);
 		// Monat des Geburtstages
 		WebElement monthElement = driver.findElement(By.className("react-datepicker__month-select"));
 		monthElement.click();
@@ -76,13 +78,12 @@ public class Test_1 {
 			// String format fuer Monat
 			new Select(monthElement).selectByVisibleText(monthofBirth);
 		}
-
+		Thread.sleep(500);
 		// Jahr des Geburtstages
 		WebElement yearElement = driver.findElement(By.className("react-datepicker__year-select"));
 		yearElement.click();
 		new Select(yearElement).selectByVisibleText(yearofBirth);
 		yearElement.click();
-
 		// Tag
 		driver.findElement(By.className("react-datepicker__day--0" + day)).click();
 
@@ -92,6 +93,39 @@ public class Test_1 {
 		e.sendKeys(Keys.ARROW_DOWN);
 		e.sendKeys(Keys.ENTER);
 
+		// Checkboxen
+		if (hobbies.contains("Sports")) {
+			driver.findElement(By.xpath("//*[@id=\"hobbiesWrapper\"]/div[2]/div[1]/label")).click();
+		}
+		if (hobbies.contains("Reading")) {
+			driver.findElement(By.xpath("//*[@id=\"hobbiesWrapper\"]/div[2]/div[2]/label")).click();
+		}
+		if (hobbies.contains("Music")) {
+			driver.findElement(By.xpath("//*[@id=\"hobbiesWrapper\"]/div[2]/div[3]/label")).click();
+		}
+
+		// Upload Picture
+		Thread.sleep(1000);
+		WebElement upload = driver.findElement(By.id("uploadPicture"));
+		upload.sendKeys("C:\\Users\\fabia\\git\\InterviewSelenium\\SeleniumInterview\\src\\main\\resources\\am.jpg");
+
+		// Adress
+		driver.findElement(By.id("currentAddress")).sendKeys(adress);
+
+		// Last DropDowns
+		WebElement dropDownLeft = driver.findElement(By.xpath("//input[@id='react-select-3-input']"));
+		dropDownLeft.sendKeys("Uttar Pradesh");
+		Thread.sleep(500);
+		dropDownLeft.sendKeys(Keys.ARROW_DOWN);
+		dropDownLeft.sendKeys(Keys.ENTER);
+
+		WebElement dropDownRight = driver.findElement(By.xpath("//*[@id=\"react-select-4-input\"]"));
+		Thread.sleep(500);
+		dropDownRight.sendKeys("Luck");
+		dropDownRight.sendKeys(Keys.ARROW_DOWN);
+		dropDownRight.sendKeys(Keys.ENTER);
+
+		dropDownRight.sendKeys(Keys.RETURN);
 	}
 
 }
