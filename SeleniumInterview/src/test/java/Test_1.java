@@ -13,7 +13,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Test_1 {
 	public static WebDriver driver;
 
-	public static String browser = "Firefox";
+	public static String browser = "Edge";
 	public static String gender = "other";
 	public static String tel_number = "03331821234";
 	public static String name = "Schmidt";
@@ -29,6 +29,7 @@ public class Test_1 {
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
+		// Browserauswahl
 		if (browser.equalsIgnoreCase("Chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
@@ -42,14 +43,17 @@ public class Test_1 {
 			System.out.println("Driver Error");
 		}
 
+		// Fenster maximieren damit Selenium Zugriff auf alle Webelemente bekommt
 		driver.manage().window().maximize();
-
+		// Seite aufrufen
 		driver.get("https://demoqa.com/automation-practice-form");
-
+		// Name und Vorname eingeben
 		driver.findElement(By.id("firstName")).sendKeys(prename);
 		driver.findElement(By.id("lastName")).sendKeys(name);
+		// EMail eingeben
 		driver.findElement(By.xpath("//*[@id=\"userEmail\"]")).sendKeys(email);
 
+		// Geschlechts Eingabe checken
 		if (gender.equalsIgnoreCase("male")) {
 			driver.findElement(By.xpath("//*[@id=\"genterWrapper\"]/div[2]/div[1]/label")).click();
 		} else if (gender.equalsIgnoreCase("female")) {
@@ -60,15 +64,20 @@ public class Test_1 {
 			System.out.println("Gender Error");
 		}
 
+		// Telefonnummer eingeben -> Error bei falscher Telefonnummer
 		if (tel_number.length() < 10) {
 			System.out.println("Number must at least contain 10 digits");
 			driver.close();
 		} else {
 			driver.findElement(By.xpath("//*[@id=\"userNumber\"]")).sendKeys(tel_number);
 		}
+		// Scroll Down -> Werbung + Scrollbar ganz oben verhindert, dass Selenium auf
+		// alle Webseitenelemente zugreifen kann
 		driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.END);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,250)");
+
+		// Birthday Box anklicken
 		driver.findElement(By.id("dateOfBirthInput")).click();
 
 		// Monat des Geburtstages
@@ -84,12 +93,16 @@ public class Test_1 {
 			// String format fuer Monat
 			new Select(monthElement).selectByVisibleText(monthofBirth);
 		}
+
+		// kurz warten die Seite spinnt sonst gerne mal bei der Kalenderbox
 		Thread.sleep(500);
+
 		// Jahr des Geburtstages
 		WebElement yearElement = driver.findElement(By.className("react-datepicker__year-select"));
 		yearElement.click();
 		new Select(yearElement).selectByVisibleText(yearofBirth);
 		yearElement.click();
+
 		// Tag
 		driver.findElement(By.className("react-datepicker__day--0" + day)).click();
 
@@ -114,12 +127,13 @@ public class Test_1 {
 		// Upload Picture
 
 		WebElement upload = driver.findElement(By.id("uploadPicture"));
+		// eignener Pfad muss angepasst werden
 		upload.sendKeys("C:\\Users\\fabia\\git\\InterviewSelenium\\SeleniumInterview\\src\\main\\resources\\am.jpg");
 
 		// Adress
 		driver.findElement(By.id("currentAddress")).sendKeys(adress);
 
-		// Last DropDowns
+		// Untersten DropDowns
 		WebElement dropDownLeft = driver.findElement(By.xpath("//input[@id='react-select-3-input']"));
 		dropDownLeft.sendKeys("Uttar Pradesh");
 		Thread.sleep(500);
@@ -132,6 +146,7 @@ public class Test_1 {
 		dropDownRight.sendKeys(Keys.ARROW_DOWN);
 		dropDownRight.sendKeys(Keys.ENTER);
 
+		// Enter als Submit -> da Submit button nicht zu sehen ist
 		dropDownRight.sendKeys(Keys.RETURN);
 	}
 
