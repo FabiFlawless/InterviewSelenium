@@ -1,0 +1,21 @@
+Firefox Report 
+
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+1663325869288	geckodriver	INFO	Listening on 127.0.0.1:49564
+1663325869535	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49970" "--remote-allow-hosts" "localhost" "--remote-allow-origins" "http://localhost:49970/" "-no-remote" "-profile" "C:\\Users\\fabia\\AppData\\Local\\Temp\\rust_mozprofile7dPCkj"
+1663325869786	Marionette	INFO	Marionette enabled
+1663325869790	Marionette	INFO	Listening on port 51732
+WebDriver BiDi listening on ws://localhost:49970
+Read port: 51732
+1663325869901	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\fabia\\AppData\\Local\\Temp\\rust_mozprofile7dPCkj\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49970/devtools/browser/03d3d31b-7eea-472c-99c0-da2f5a1407f9
+Sept. 16, 2022 12:57:51 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFORMATION: Detected upstream dialect: W3C
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 292: NS_ERROR_FAILURE: Should pass a non-null uri
+JavaScript error: https://cdn.ad.plus/player/adplus.js, line 400: TypeError: e(...).setup is not a function
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IIqf1vOd-6pW952NlRsbn4M3wW5PqZJVav1GItm6W8s.js line 2 > eval line 5303 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/IIqf1vOd-6pW952NlRsbn4M3wW5PqZJVav1GItm6W8s.js line 2 > eval line 2874 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://demoqa.com."
