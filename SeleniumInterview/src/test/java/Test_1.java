@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,15 +13,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Test_1 {
 	public static WebDriver driver;
 
-	public static String browser = "Edge";
+	public static String browser = "Firefox";
 	public static String gender = "other";
 	public static String tel_number = "03331821234";
 	public static String name = "Schmidt";
 	public static String prename = "Bob";
 	public static String email = "test123@web.de";
-	public static String monthofBirth = "October";
-	public static String yearofBirth = "2000";
-	public static String day = "15";
+	public static String monthofBirth = "9";
+	public static String yearofBirth = "1944";
+	public static String day = "12";
 	public static String subject = "Maths";
 	public static String hobbies = "Sports,Reading";
 	public static String adress = "An der Schulstraﬂe 9a";
@@ -40,8 +41,11 @@ public class Test_1 {
 		} else {
 			System.out.println("Driver Error");
 		}
+
 		driver.manage().window().maximize();
+
 		driver.get("https://demoqa.com/automation-practice-form");
+
 		driver.findElement(By.id("firstName")).sendKeys(prename);
 		driver.findElement(By.id("lastName")).sendKeys(name);
 		driver.findElement(By.xpath("//*[@id=\"userEmail\"]")).sendKeys(email);
@@ -62,9 +66,11 @@ public class Test_1 {
 		} else {
 			driver.findElement(By.xpath("//*[@id=\"userNumber\"]")).sendKeys(tel_number);
 		}
-
+		driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.END);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,250)");
 		driver.findElement(By.id("dateOfBirthInput")).click();
-		Thread.sleep(500);
+
 		// Monat des Geburtstages
 		WebElement monthElement = driver.findElement(By.className("react-datepicker__month-select"));
 		monthElement.click();
@@ -90,6 +96,7 @@ public class Test_1 {
 		// Autofill Container for Subjects
 		WebElement e = driver.findElement(By.id("subjectsInput"));
 		e.sendKeys(subject);
+		Thread.sleep(500);
 		e.sendKeys(Keys.ARROW_DOWN);
 		e.sendKeys(Keys.ENTER);
 
@@ -105,7 +112,7 @@ public class Test_1 {
 		}
 
 		// Upload Picture
-		Thread.sleep(1000);
+
 		WebElement upload = driver.findElement(By.id("uploadPicture"));
 		upload.sendKeys("C:\\Users\\fabia\\git\\InterviewSelenium\\SeleniumInterview\\src\\main\\resources\\am.jpg");
 
